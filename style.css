@@ -1,0 +1,86 @@
+/* I’m making the page look nice using CSS. 
+   These are my color variables so I can change the theme easily in one place. */
+:root {
+  --bg: #0f172a;        /* page background (dark blue) */
+  --card: #111827;      /* box behind the video (even darker) */
+  --text: #e5e7eb;      /* normal text color (light) */
+  --accent: #f59e0b;    /* highlight color (amber/yellow) */
+}
+
+/* This makes width/height calculations easier (includes padding/border). */
+* { box-sizing: border-box; }
+
+/* Main page settings */
+body {
+  margin: 0;                              /* remove default white gap */
+  font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif; /* simple readable font */
+  background: var(--bg);                  /* use my background color */
+  color: var(--text);                     /* use my text color */
+  display: grid;                          /* grid lets me center things simply */
+  place-items: start center;              /* top + center horizontally */
+  min-height: 100vh;                      /* make it at least full screen height */
+  gap: 24px;                              /* space between header and card */
+  padding: 24px;                          /* breathing room around everything */
+}
+
+/* Title and subtitle styling */
+h1 { 
+  margin: 8px 0 0;                        /* small space above the title */
+  text-align: center;                     /* center the title text */
+}
+.subtitle { 
+  opacity: 0.8;                           /* make subtitle a bit lighter */
+  margin: 0;                              /* remove extra space */
+  text-align: center;                     /* center the subtitle too */
+}
+
+/* The main card that holds the video and the moving bar */
+.card {
+  width: min(800px, 92vw);                /* be responsive: max 800px or 92% of screen */
+  background: var(--card);                /* dark box color */
+  border: 1px solid rgba(245, 158, 11, 0.25); /* a thin amber border (see-through) */
+  border-radius: 14px;                    /* rounded corners */
+  padding: 12px;                          /* space inside the box */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.35); /* soft shadow so it pops */
+}
+
+/* Video container: keeps the YouTube frame in 16:9 shape */
+.video {
+  position: relative;                     /* lets the iframe fill this box */
+  width: 100%;                            /* take full width of the card */
+  aspect-ratio: 16 / 9;                   /* keep the classic video ratio */
+  border-radius: 10px;                    /* rounded corners for the video */
+  overflow: hidden;                       /* hide anything that sticks out */
+}
+/* Make the iframe fill the .video box perfectly */
+.video iframe {
+  position: absolute; inset: 0;           /* stick to all four sides */
+  width: 100%; height: 100%;              /* full size */
+  border: 0;                              /* no default border */
+}
+
+/* ===== Moving yellow bar (animation) ===== */
+/* The track (background) where the dot moves */
+.anim-wrap {
+  margin: 6px 0 2px;                      /* tiny space around the bar */
+  background: rgba(255,255,255,0.06);     /* faint light track so we can see it */
+  border-radius: 999px;                   /* fully rounded (pill shape) */
+  height: 8px;                            /* thickness of the track */
+  position: relative;                     /* so the dot can be positioned inside */
+  overflow: hidden;                       /* keep the dot inside the pill */
+}
+/* The dot itself (this is what moves left and right) */
+.anim-dot {
+  position: absolute; 
+  top: 0; left: 0;                        /* start at the left edge */
+  height: 8px; width: 24px;               /* small rectangle “dot” */
+  background: #f59e0b;                    /* bright amber so it’s easy to see */
+  border-radius: 999px;                   /* rounded ends */
+  transform: translateX(0);               /* JS will change this to move it */
+}
+
+/* Some computers ask to reduce motion. 
+   I still want the dot visible, so I don’t hide it here. */
+@media (prefers-reduced-motion: reduce) {
+  .anim-dot { display: block; }
+}

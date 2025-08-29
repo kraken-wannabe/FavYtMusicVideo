@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<!-- I’m making a super simple music page. It has a head (settings) and a body (stuff I see). -->
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <!-- This makes the page resize nicely on phones. -->
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <!-- Text that shows on the browser tab -->
+  <title>My Music Page</title>
+
+  <!-- I’m linking my CSS file so the page has colors and layout. 
+       (Make sure the file name is exactly "style.css" and in the same folder.) -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- Main header area with big title and a small subtitle -->
+  <header>
+    <h1>My Favorite Music Video</h1>
+    <p class="subtitle">simple page • css theme • js animation</p>
+  </header>
+
+  <!-- This card is just a nice box that holds the video + the moving bar + the text -->
+  <section class="card">
+    <!-- YouTube video: I used the EMBED link.
+         If I want a different song, I change the video ID at the end of the URL. -->
+    <div class="video">
+      <iframe
+        src="https://www.youtube.com/embed/gMKC7mPUkYQ"
+        title="YouTube video player"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+        allowfullscreen>
+      </iframe>
+    </div>
+
+    <!-- Little yellow bar area.
+         The inner <div id="dot"> is the part that moves left and right using my JS. 
+         aria-hidden means screen readers can skip this because it’s just decoration. -->
+    <div class="anim-wrap" aria-hidden="true">
+      <div class="anim-dot" id="dot"></div>
+    </div>
+
+    <!-- Simple caption under the video -->
+    <p class="now-playing">Now Playing: Lose Yourself - Eminem (Cover)</p>
+  </section>
+
+  <!-- Small footer text at the bottom -->
+  <footer>Made with ♥ for class</footer>
+
+  <!-- I put my JavaScript at the end so the HTML elements above already exist when the script runs. -->
+  <script src="script.js"></script>
+</body>
+</html>
